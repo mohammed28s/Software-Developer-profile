@@ -36,18 +36,6 @@ public class SecurityConfig {
     }
 
     @Bean
-    InMemoryUserDetailsManager users(
-            @Value("${portfolio.admin.username}") String username,
-            @Value("${portfolio.admin.password}") String password,
-            PasswordEncoder passwordEncoder) {
-        UserDetails admin = User.withUsername(username)
-                .password(passwordEncoder.encode(password))
-                .roles("ADMIN")
-                .build();
-        return new InMemoryUserDetailsManager(admin);
-    }
-
-    @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }

@@ -1,0 +1,80 @@
+<div class="portfolio-container">
+  <header>
+    <nav>
+      <div class="logo">My Portfolio</div>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="about" class="hero">
+    <div class="hero-content">
+      <h1>Software Developer</h1>
+      <p class="description">
+        I am a passionate software engineer focused on building high-quality, scalable applications. 
+        Experienced in full-stack development with a strong foundation in modern technologies.
+      </p>
+      <button class="cta-button" (click)="downloadCv()">Download CV</button>
+    </div>
+    <div class="hero-image">
+      <img [src]="profileImageUrl" alt="Profile" onerror="this.src='https://via.placeholder.com/200'">
+    </div>
+  </section>
+
+  <section id="skills" class="skills-section">
+    <h2>Technical Skills</h2>
+    <div class="skills-grid">
+      <div *ngFor="let category of getCategorizedSkills()" class="skill-category">
+        <h3>{{ category.name }}</h3>
+        <div class="skill-items">
+          <div *ngFor="let skill of category.skills" class="skill-item">
+            <span>{{ skill.skillName }}</span>
+            <div class="progress-bar">
+              <div class="progress" [style.width.%]="skill.proficiencyLevel"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience" class="experience-section">
+    <h2>Professional Experience</h2>
+    <div class="experience-timeline">
+      <div *ngFor="let exp of experience" class="experience-card">
+        <div class="exp-header">
+          <h3>{{ exp.jobTitle }}</h3>
+          <span class="company">{{ exp.companyName }}</span>
+          <span class="dates">{{ exp.startDate | date }} - {{ exp.currentJob ? 'Present' : (exp.endDate | date) }}</span>
+        </div>
+        <p class="achievements">{{ exp.achievements }}</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="projects-section">
+    <h2>Projects</h2>
+    <div class="projects-grid">
+      <div *ngFor="let project of projects" class="project-card">
+        <img [src]="project.imageUrl || 'https://via.placeholder.com/300x200'" alt="{{ project.title }}">
+        <div class="project-info">
+          <h3>{{ project.title }}</h3>
+          <p>{{ project.description }}</p>
+          <div class="tech-stack">{{ project.techStack }}</div>
+          <div class="project-links">
+            <a *ngIf="project.githubUrl" [href]="project.githubUrl" target="_blank">GitHub</a>
+            <a *ngIf="project.demoUrl" [href]="project.demoUrl" target="_blank">Demo</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 Developer Portfolio. All rights reserved.</p>
+  </footer>
+</div>

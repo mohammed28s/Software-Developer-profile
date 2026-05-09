@@ -1,0 +1,85 @@
+<div class="admin-container">
+  <h1>Admin Dashboard</h1>
+
+  <section class="admin-section">
+    <h2>Manage Assets</h2>
+    <div class="asset-uploads">
+      <div class="upload-item">
+        <label>Upload CV (PDF)</label>
+        <input type="file" (change)="onFileSelected($event, 'cv')" accept=".pdf">
+      </div>
+      <div class="upload-item">
+        <label>Upload Profile Image (JPG/PNG)</label>
+        <input type="file" (change)="onFileSelected($event, 'profile')" accept="image/*">
+      </div>
+    </div>
+  </section>
+
+  <section class="admin-section">
+    <h2>Manage Experience</h2>
+    <form (submit)="saveExperience()" class="admin-form">
+      <input [(ngModel)]="newExperience.companyName" name="companyName" placeholder="Company Name" required>
+      <input [(ngModel)]="newExperience.jobTitle" name="jobTitle" placeholder="Job Title" required>
+      <input type="date" [(ngModel)]="newExperience.startDate" name="startDate" placeholder="Start Date">
+      <input type="date" [(ngModel)]="newExperience.endDate" name="endDate" placeholder="End Date">
+      <textarea [(ngModel)]="newExperience.achievements" name="achievements" placeholder="Achievements"></textarea>
+      <label>
+        <input type="checkbox" [(ngModel)]="newExperience.currentJob" name="currentJob"> Current Job
+      </label>
+      <button type="submit">{{ newExperience.id ? 'Update' : 'Add' }} Experience</button>
+    </form>
+
+    <div class="admin-list">
+      <div *ngFor="let exp of experience" class="list-item">
+        <span>{{ exp.jobTitle }} at {{ exp.companyName }}</span>
+        <div class="actions">
+          <button (click)="editExperience(exp)">Edit</button>
+          <button (click)="deleteExperience(exp.id)" class="delete">Delete</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="admin-section">
+    <h2>Manage Projects</h2>
+    <form (submit)="saveProject()" class="admin-form">
+      <input [(ngModel)]="newProject.title" name="title" placeholder="Title" required>
+      <textarea [(ngModel)]="newProject.description" name="description" placeholder="Description"></textarea>
+      <input [(ngModel)]="newProject.techStack" name="techStack" placeholder="Tech Stack">
+      <input [(ngModel)]="newProject.githubUrl" name="githubUrl" placeholder="GitHub URL">
+      <input [(ngModel)]="newProject.demoUrl" name="demoUrl" placeholder="Demo URL">
+      <input [(ngModel)]="newProject.imageUrl" name="imageUrl" placeholder="Image URL">
+      <button type="submit">{{ newProject.id ? 'Update' : 'Add' }} Project</button>
+    </form>
+
+    <div class="admin-list">
+      <div *ngFor="let project of projects" class="list-item">
+        <span>{{ project.title }}</span>
+        <div class="actions">
+          <button (click)="editProject(project)">Edit</button>
+          <button (click)="deleteProject(project.id)" class="delete">Delete</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="admin-section">
+    <h2>Manage Skills</h2>
+    <form (submit)="saveSkill()" class="admin-form">
+      <input [(ngModel)]="newSkill.skillName" name="skillName" placeholder="Skill Name" required>
+      <input [(ngModel)]="newSkill.category" name="category" placeholder="Category (e.g. Frontend)">
+      <input type="number" [(ngModel)]="newSkill.proficiencyLevel" name="proficiencyLevel" placeholder="Proficiency (0-100)">
+      <button type="submit">{{ newSkill.id ? 'Update' : 'Add' }} Skill</button>
+    </form>
+
+    <div class="admin-list">
+      <div *ngFor="let skill of skills" class="list-item">
+        <span>{{ skill.skillName }} ({{ skill.category }})</span>
+        <div class="actions">
+          <button (click)="editSkill(skill)">Edit</button>
+          <button (click)="deleteSkill(skill.id)" class="delete">Delete</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
