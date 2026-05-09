@@ -1,0 +1,8 @@
+.DS_Store
+target/
+backend/target/
+uploads/
+backend/uploads/
+.env
+.idea/
+.vscode/
